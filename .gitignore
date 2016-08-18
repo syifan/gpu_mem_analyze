@@ -22,3 +22,10 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+*.png
+*.eps
+
+.vscode
+
+gpu_mem_analyze

@@ -12,18 +12,24 @@ import (
 	"time"
 )
 
+// A DataPoint is a point that is going to be shown on the figure. It is a
+// collection of the time, the number of iterations, and some other information
+// that is recorded at that time
 type DataPoint struct {
 	Iteration int
 	Accuracy  float64
 	TimeInSec float64
 }
 
+// An Experiment collects the information of one program execution
 type Experiment struct {
 	StartTime time.Time
 	BatchSize int
 	Points    []DataPoint
 }
 
+// LoadExperimentFromFile reads and parses the file and organized the
+// the information in an Experiment
 func LoadExperimentFromFile(path string) (experiment Experiment) {
 
 	file, err := os.Open(path)
@@ -98,10 +104,9 @@ func tryParseIteration(line string) (iteration int) {
 
 	if len(match) == 0 {
 		return 0
-	} else {
-		iteration, _ = strconv.Atoi(string(match[1]))
-		return
 	}
+	iteration, _ = strconv.Atoi(string(match[1]))
+	return
 }
 
 func tryToParseDataPoint(line string, startTime time.Time) (dataPoint *DataPoint) {
